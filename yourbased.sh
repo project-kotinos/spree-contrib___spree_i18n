@@ -24,7 +24,7 @@ mv -f ~/chromedriver /usr/local/share/
 chmod +x /usr/local/share/chromedriver
 ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 # install
-bundle install --jobs=3 --retry=3
+bundle install --jobs=3 --retry=3 --pristine
 # script
 bundle exec rake test_app
 bundle exec rake spec
