@@ -16,6 +16,8 @@ export JRUBY_OPTS="--server -Dcext.enabled=false -Xcompile.invokedynamic=false"
 apt-get update && apt-get install -y tzdata unzip
 gem install bundler -v 2.0.1
 
+echo "PATH: $PATH"
+
 # Install chrome and chrome driver
 if [ ! -f /usr/bin/google-chrome ]; then
   curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add
@@ -49,6 +51,8 @@ fi
 
 export PATH="$PATH:/opt/bin"
 echo "PATH IS $PATH"
+
+ruby -v 
 
 # install
 bundle install --jobs=3 --retry=3 

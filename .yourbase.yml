@@ -17,12 +17,13 @@ build_targets:
 #   name: 2.3.7_spree_3_5.gemfile
 - commands:
   - chmod +x yourbased.sh
+  - ruby -v
   - sh ./yourbased.sh
   container:
     image: yourbase/yb_ubuntu:16.04
   environment:
-  - BUNDLE_GEMFILE=gemfiles/spree_3_7.gemfile
-  name: 2.3.7_spree_3_7.gemfile
+    #- BUNDLE_GEMFILE=gemfiles/spree_3_7.gemfile
+  name: 2.5.1_spree_3_7.gemfile
 # - commands:
 #   - chmod +x yourbased.sh
 #   - sh ./yourbased.sh
@@ -37,10 +38,10 @@ ci:
 #     name: 2.3.7_spree_3_2.gemfile
 #   - build_target: 2.3.7_spree_3_5.gemfile
 #     name: 2.3.7_spree_3_5.gemfile
-  - build_target: 2.3.7_spree_3_7.gemfile
-    name: 2.3.7_spree_3_7.gemfile
+  - build_target: 2.5.1_spree_3_7.gemfile
+    name: 2.5.1_spree_3_7.gemfile
 #   - build_target: 2.3.7_spree_master.gemfile
 #     name: 2.3.7_spree_master.gemfile
 dependencies:
   build:
-  - ruby:2.3.7
+  - ruby:2.5.1
