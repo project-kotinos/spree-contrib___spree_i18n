@@ -12,9 +12,13 @@ export RAILS_ENV=test
 export RACK_ENV=test
 export MERB_ENV=test
 export JRUBY_OPTS="--server -Dcext.enabled=false -Xcompile.invokedynamic=false"
+#export BUNDLE_GEMFILE="${PWD}/${BUNDLE_GEMFILE}"
+
+env
 
 apt-get update && apt-get install -y tzdata unzip
-gem install bundler -v 2.0.1
+gem update --system
+gem install bundler -v 1.16.3
 
 echo "PATH: $PATH"
 
@@ -55,7 +59,8 @@ echo "PATH IS $PATH"
 ruby -v 
 
 # install
-bundle install --jobs=3 --retry=3 
+bundle install --jobs=3 --retry=3
 # script
 bundle exec rake test_app
 bundle exec rake spec
+
