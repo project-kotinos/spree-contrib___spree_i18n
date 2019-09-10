@@ -1,0 +1,33 @@
+build_targets:
+- commands:
+  - chmod +x yourbased.sh
+  - ruby -v
+  - sh ./yourbased.sh
+  container:
+    image: yourbase/yb_ubuntu:16.04
+  dependencies:
+    containers:
+      postgres:
+        image: postgres
+        environment:
+          - POSTGRES_PASSWORD=ci
+          - POSTGRES_USER=ci
+          - POSTGRES_DB=dummy_test
+        port_check:
+          port: 5432
+          timeout: 45
+  environment:
+    - BUNDLE_GEMFILE=gemfiles/spree_3_7.gemfile
+    - DB=postgres
+    - DATABASE_URL=postgres://ci:ci@{{ .Containers.IP "postgres" }}:5432/dummy_test
+    - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
+  name: 2.5.1_spree_3_7.gemfile
+
+ci:
+  builds:
+  - build_target: 2.5.1_spree_3_7.gemfile
+    name: 2.5.1_spree_3_7.gemfile
+
+dependencies:
+  build:
+  - ruby:2.5.1
