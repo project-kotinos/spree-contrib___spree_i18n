@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -ex
+N=`date +%s%N`; export PS4='+[$(((`date +%s%N`-$N)/1000000))ms][${BASH_SOURCE}:${LINENO}]: ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'; set -x;
 
 export DEBIAN_FRONTEND=noninteractive
 export CI=true
