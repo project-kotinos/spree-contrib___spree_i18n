@@ -7,7 +7,7 @@ require 'rubygems/package_task'
 require 'rspec/core/rake_task'
 require 'spree/testing_support/common_rake'
 require 'spree_i18n'
-
+require 'yourbase/rspec/skipper'
 Bundler::GemHelper.install_tasks
 RSpec::Core::RakeTask.new
 

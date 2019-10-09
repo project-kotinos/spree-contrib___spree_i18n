@@ -1,0 +1,50 @@
+build_targets:
+- commands:
+  - apt-get update && apt-get install -y tzdata unzip
+  - gem update --system
+  - gem install bundler -v 1.16.3
+  - ruby -v
+  - chmod +x yourbased.sh
+  - sh ./yourbased.sh 
+  - bundle install --jobs=3 --retry=3
+  - bundle exec rake test_app
+  - bundle exec rake spec
+  container:
+    image: yourbase/yb_ubuntu:16.04
+  dependencies:
+    containers:
+      postgres:
+        image: postgres
+        environment:
+          - POSTGRES_PASSWORD=ci
+          - POSTGRES_USER=ci
+          - POSTGRES_DB=dummy_test
+        port_check:
+          port: 5432
+          timeout: 45
+  environment:
+    - BUNDLE_GEMFILE=gemfiles/spree_3_7.gemfile
+    - DB=postgres
+    - DATABASE_URL=postgres://ci:ci@{{ .Containers.IP "postgres" }}:5432/dummy_test
+    - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
+    - DEBIAN_FRONTEND=noninteractive
+    - CI=true
+    - TRAVIS=true
+    - CONTINUOUS_INTEGRATION=true
+    - USER=travis
+    - LANG=en_US.UTF-8
+    - LC_ALL=en_US.UTF-8
+    - RAILS_ENV=test
+    - RACK_ENV=test
+    - MERB_ENV=test
+    - JRUBY_OPTS="--server -Dcext.enabled=false -Xcompile.invokedynamic=false"
+  name: 2.5.1_spree_3_7.gemfile
+
+ci:
+  builds:
+  - build_target: 2.5.1_spree_3_7.gemfile
+    name: 2.5.1_spree_3_7.gemfile
+
+dependencies:
+  build:
+  - ruby:2.5.1
