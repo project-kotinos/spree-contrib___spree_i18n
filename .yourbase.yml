@@ -7,9 +7,6 @@ build_targets:
   - ruby -v
   - chmod +x yourbased.sh
   - sh ./yourbased.sh 
-  - bundle install --jobs=3 --retry=3
-  - bundle exec rake test_app
-  - bundle exec rake spec
   container:
     image: yourbase/yb_ubuntu:16.04
   dependencies:

@@ -34,3 +34,6 @@ if [ ! -f /usr/bin/google-chrome-binary ]; then
 fi
 
 export PATH="$PATH:/opt/bin"
+bundle install --jobs=3 --retry=3
+bundle exec rake test_app
+bundle exec rake spec
